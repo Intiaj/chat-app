@@ -25,7 +25,6 @@ export default function Home() {
     querySnapshot.docs.forEach((doc) => {
       if (doc.exists()) {
         setUserData(doc.data());
-        
       }
     });
   };

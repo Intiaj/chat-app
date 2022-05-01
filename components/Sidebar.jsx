@@ -77,30 +77,32 @@ function Sidebar({ displayName }) {
             ))}
         </div>
       ) : null}
-      <div className="">
-        <UsersList name={displayName}/>
-      </div>
+      <div className="flex justify-between flex-col w-full">
+        <div className="">
+          <UsersList name={displayName} />
+        </div>
 
-      <div className="absolute bottom-0">
-        <button
-          onClick={() => {
-            setOpenChat(!openChat);
-          }}
-          className="border w-80 mx-6 flex justify-center items-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+        <div className=" bg-blue-400 rounded-lg mx-4">
+          <button
+            onClick={() => {
+              setOpenChat(!openChat);
+            }}
+            className="border flex justify-center items-center w-full"
           >
-            <path
-              fillRule="evenodd"
-              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-white bg-blue-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );

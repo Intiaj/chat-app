@@ -3,6 +3,7 @@ import {
   collection,
   doc,
   getDocs,
+  onSnapshot,
   orderBy,
   query,
   serverTimestamp,
@@ -12,7 +13,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { db } from "../firebase";
 import Message from "./Message";
-
 
 function ChatArea({ displayName }) {
   const selectedUser = useSelector((state) => state.user.user);
@@ -34,49 +34,56 @@ function ChatArea({ displayName }) {
     }
   };
 
-  useEffect(() => {
-    getAllMessages();
-  }, []);
-
-  const getAllMessages = async () => {
+  if (selectedUser) {
     const uid1 =
-    displayName.length > selectedUser.length
+      displayName?.length > selectedUser?.length
         ? `${displayName + selectedUser}`
         : `${selectedUser + displayName}`;
     const ref = collection(db, "chats", uid1, "sms");
     const q = query(ref, orderBy("timeStamp", "asc"));
-    const ss = await getDocs(q);
-    const allMessages = [];
-    ss.docs.forEach((res) => {
-      allMessages.push(res.data());
-      setAllMessage(allMessages);
+
+    onSnapshot(q, (qSnapShot) => {
+      const user = [];
+      qSnapShot.docs.forEach((doc) => {
+        user.push(doc.data());
+      });
+      setAllMessage(user);
     });
-  };
+  }
 
   return (
     <div className="col-span-3 relative h-screen">
       <div className="">
-        {allMessage.map((item) => (
-          <Message
-            key={item.message}
-            text={item.message}
-            sender={item.sender}
-            current={displayName}
-          />
-        ))}
+        {allMessage.map((item) => {
+          const date = item?.timeStamp?.toDate();
+          return (
+            <div
+              className="p-1"
+              key={`${item?.timeStamp?.seconds + item?.timeStamp1?.nanoseconds}`}
+            >
+              <Message
+                text={item.message}
+                sender={item.sender}
+                current={displayName}
+                timestamp={`${date}`}
+              />{" "}
+            </div>
+          );
+        })}
       </div>
       <div className="absolute bottom-16 w-full  h-16 flex items-center rounded-lg">
         <input
           onChange={(e) => setMessage(e.target.value)}
           className="border-2 h-full w-full rounded-l-lg"
           placeholder="Type a message..."
+          value={message}
         />
         <button
           onClick={() => {
             if (selectedUser) {
               sendMessage();
-              getAllMessages();
-              setMessage('')
+
+              setMessage("");
             }
           }}
           className="bg-green-400 h-full w-24 flex flex-col items-center justify-center text-white font-bold hover:brightness-95 rounded-r-lg"
