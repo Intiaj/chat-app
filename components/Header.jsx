@@ -4,11 +4,17 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useSelector } from "react-redux";
 
-
 function Header({ displayPhoto, displayName }) {
-  const selectedUser = useSelector((state) => state.user.user)
+  const selectedUser = useSelector((state) => state.user.user);
+
   return (
-    <div className="grid grid-cols-4 pl-2 py-2 bg-gray-300">
+    <div
+      style={{
+        backgroundImage:
+          "linear-gradient( 102.4deg,  rgba(253,189,85,1) 7.8%, rgba(249,131,255,1) 100.3% )",
+      }}
+      className="grid grid-cols-4 pl-2 py-2 "
+    >
       <div className="col-span-1 border-r border-gray-500">
         <div className="flex items-center">
           <img
@@ -32,7 +38,7 @@ function Header({ displayPhoto, displayName }) {
               src={`https://www.robohash.org/${selectedUser}`}
               placeholder=""
               alt=""
-              className="rounded-full h-12 w-12 "
+              className="rounded-full h-12 w-12 bg-cyan-400"
             />
             <h1 className="font-bold ml-2">{selectedUser}</h1>
           </div>

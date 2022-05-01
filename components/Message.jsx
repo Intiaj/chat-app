@@ -6,14 +6,14 @@ function Message({ sender, text, current, timestamp }) {
       <div
         className={
           current === sender
-            ? "w-1/4 bg-green-300 border rounded-xl px-4 text-xl font-bold flex flex-col text-left"
+            ? "w-1/4 bg-white text-black border rounded-xl px-4 text-xl font-bold flex flex-col text-left"
             : "relative text-xl font-bold flex flex-col"
         }
       >
         <div
           className={
             !(current === sender)
-              ? "absolute right-1 rounded-xl bg-blue-200 p-2 w-1/4 text-right"
+              ? "absolute right-1 rounded-xl bg-blue-700 text-white p-2 w-1/4 text-right"
               : null
           }
         >

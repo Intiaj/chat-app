@@ -36,8 +36,8 @@ function Register() {
   const [userName2, setUserName2] = useState("");
   const [logInSwitch, setLoginSwitch] = useState(false);
   return (
-    <div className="min-h-screen min-w-full flex flex-col justify-center items-center">
-      <div className="border h-fit w-fit grid grid-cols-2 rounded-lg shadow-md">
+    <div className="min-h-screen min-w-full flex flex-col justify-center items-center mx-2 mt-12 lg:mt-0">
+      <div className="border h-fit w-fit grid lg:grid-cols-2 rounded-lg shadow-md">
         <div className="col-span-1 flex flex-col justify-center items-center">
           {!logInSwitch ? (
             <div className="flex flex-col">
@@ -83,9 +83,9 @@ function Register() {
             </div>
           )}
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 p-4 rounded">
           <img
-            className="rounded-r-lg"
+            className="lg:rounded-r-lg rounded-md"
             src="https://i.pinimg.com/550x/0a/c7/82/0ac78255854d1f5324dcea1bd2209025.jpg"
             alt=""
           />

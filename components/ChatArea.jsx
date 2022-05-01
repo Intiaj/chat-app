@@ -1,8 +1,6 @@
 import {
   addDoc,
   collection,
-  doc,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -52,7 +50,7 @@ function ChatArea({ displayName }) {
   }
 
   return (
-    <div className="col-span-3 relative h-screen">
+    <div className="col-span-3 relative h-screen overflow-y-scroll">
       <div className="">
         {allMessage.map((item) => {
           const date = item?.timeStamp?.toDate();
@@ -71,7 +69,7 @@ function ChatArea({ displayName }) {
           );
         })}
       </div>
-      <div className="absolute bottom-16 w-full  h-16 flex items-center rounded-lg">
+      <div className="absolute bottom-0 w-full h-16 flex items-center rounded-lg">
         <input
           onChange={(e) => setMessage(e.target.value)}
           className="border-2 h-full w-full rounded-l-lg"
